@@ -155,3 +155,91 @@ Detta kallas Bayes sats.
                        "gynsam väg"
 Jämför trädstrukturen: _____________
                        möjliga vägar
+
+*ex:* (2.20 i Blom)
+
+H_1 = "person har sjukdomen"
+A = "testet ger positivt utslag"
+
+Givet:
+$P(A | H_1) = 0.9999$
+$P(A* | H_1*) = 0.995$
+
+p = P(H_1)
+
+Sökt:
+
+$P("personen har sjukdomen om positivt utslag") = P(H_1 | A)$
+
+$P(H_1 | A) = \frac{P(H_1 \intersect A)}{P(A)} = \frac{P(H_1 \intersect A)}{P(H_1 \intersect A) + P(H_1* \intersect A)}$
+
+![Sick](inc/lecture_2/sick.png)
+
+Bayes sats ger
+```
+  P(A | H_1) * P(H_1)
+= _______________________________________
+  P(A | H_1)*P(H_1) + P(A | H_1*)*P(H_1*)
+
+  0.9999 * p
+= _______________________________________
+  0.9999*p + (1 - 0.995)*(1 - p)
+```
+
+p = 0.2   => P(H_1 | A) = 0.98   P(H_1* | A) = 0.02
+p = 0.001 => P(H_1 | A) = 0.17   P(H_1* | A) = 0.83
+
+---> Thus bad to mas test for Corona.
+
+## Oberoende
+
+P(A) = A och B oberoende = P(A | B) = \frac{P(A \intersect B)}{P(B)}
+
+D.v.s. P(A)*P(B) = P(A \intersect B)
+
+*Definition:*
+A och B är oberoende <=> $P(A | B) = P(A) * P(B)$
+
+*ex:* (2.23 i Blom) En person utsätter sig för olycksrisken 1/1000 1000 gånger.
+
+$P("personen råkar ut för olyckan minst en gång") = 1 - P("personen råkar aldrig ut för olyckan")$
+
+givet att händelserna är oberoende ->
+
+P("person råkar ut för olyckan minst en gång") = 1 - (1 - \frac{1}{1000})^1000 = 63.23%
+
+*ex:* (2.18 Blom)
+
+Beräkna sannolikheten att man vid dragning av fem kort ur en kortlek med 52 kort erhåller:
+
+a) ess, kung dam, knekt, tio i samma färg (Royal flush)
+
+Note: tänk på att ta hänsyn till ordning i både täljare och nämnare, eller ej hänsyn till ordning i varken täljare eller nämnare.
+
+Det finns 4 Royal flush (en per färg)
+
+g=4
+m=(52 choose 5)
+
+Både g och m är utan hänsyn till ordning.
+
+eller...
+
+Välj flush på följande sätt:
+
+20 val på första kortet (ett kort av ess, kung, dam, knäkt, 10 i en av fyra färger).
+4 val på andra kortet (ett kort av ess, kung, dam, knäkt, 10 i samma färg, och inte samma kort som vid första valet).
+3 val på tredje kortet
+2 val på fjärde kortet
+1 val på femte kortet
+
+Nu har vi tagit hänsyn till ordning vid valet av gynsamma fall $g$. Således måste vi ta hänsyn till ordning även i totala antalet fall $m$.
+
+g = 20*4*3*2*1
+m = 52*51*50*49*48
+
+Med hänsyn till ordning:
+P("Royal flush") = \frac{g}{m} = \frac{20*4*3*2*1}{52*51*50*49*48} = \frac{1}{649740}
+
+Utan hänsyn till ordning:
+P("Royal flush") = \frac{4}{(52 choose 5)} = \frac{4}{2598960} = \frac{1}{649740}
